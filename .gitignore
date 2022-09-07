@@ -35,20 +35,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-
-threeletterwords.txt
-fourletterwords.txt
-fiveletterwords.txt
-sixletterwords.txt
-sevenletterwords.txt
-eightletterwords.txt
-nineletterwords.txt
-tenletterwords.txt
-elevenletterwords.txt
-twelveletterwords.txt
-thirteenletterwords.txt
-fourteenletterwords.txt
-fifteenletterwords.txt
-sixteenletterwords.txt
-
-/firebase/firestore_key.json
