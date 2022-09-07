@@ -111,19 +111,19 @@ const Home = ({
   return (
     <>
       <Head>
-        <title>Wordlebin: Unlimited Word Guessing Game</title>
+        <title>Unlimited Word Game </title>
         <meta
           name={"description"}
           content={
-            "Play online word guessing game with over 600,000+ words to spell. Create custom word games and share with friends."
+            "Play online word guessing game with over 5000 words to spell. Play games with friends and test your word guessing skills."
           }
         />
         <meta property="og:title" content="Play 5-Word Guessing Game" />
         <meta
           property="og:description"
-          content="Play free online guessing game and share custom games with friends. Optimized for all screen sizes."
+          content="Play free online guessing game and share custom games with friends."
         />
-        <meta property="og:image" content="https://wordlebin.com/favicon.ico" />
+        <meta property="og:image" content="/favicon.ico" />
 
         <link
           rel="apple-touch-icon"
@@ -149,7 +149,10 @@ const Home = ({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
-        <link rel="canonical" href="https://wordlebin.com" />
+        <link
+          rel="canonical"
+          href="https://production-pja23flz7a-uc.a.run.app/"
+        />
       </Head>
       <Container fluid>
         <div
