@@ -61,8 +61,6 @@ const K = ({
 
   //after pressing enter, adds all keys used in row and color codes them
   function addKeysUsed(userSpelling: string[]) {
-    console.log(userSpelling);
-
     const y = [...keysUsed];
     var m = [...keysUsedColorCode];
     const z = new Array();
@@ -90,10 +88,8 @@ const K = ({
           w.push("#949494");
         }
       } else {
-        console.log("key " + x + " alredy in use");
         //it is green, cant be switched to any other color
         if (keysUsedColorCode[index] !== "rgb(83, 141, 78)") {
-          console.log(x + " is not green, checking if can be green now");
           if (x.toLowerCase() == currentWord[index]) {
             m.splice(y.indexOf(x), 1, "rgb(83, 141, 78)");
           }

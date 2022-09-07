@@ -10,7 +10,14 @@ type Data = {
 };
 import removeSpaces from "../../scripts/removeSpaces";
 
-const filePath = path.resolve(__dirname, "../../../../pages/api/word_bank.txt");
+const filePath = path.join(
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "..",
+  "fiveletterwords.txt"
+);
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,15 +32,12 @@ export default async function handler(
 
       //remove any spaces from word user submits
       const noSpaceWord = await removeSpaces(req.body.word);
-      console.log("WORD WITH NO SPACES " + noSpaceWord);
 
       const index = await obj.indexOf(noSpaceWord);
 
       if (index !== -1) {
-        console.log("WORD EXISTS");
         res.status(200).json({ status: 200, word: noSpaceWord });
       } else {
-        console.log("word does not exist :(");
         res.status(200).json({ status: 401 });
       }
     }

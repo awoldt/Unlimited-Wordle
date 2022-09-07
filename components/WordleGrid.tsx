@@ -71,6 +71,7 @@ const Grid = ({
                   //green
                   return (
                     <div
+                      key={index2}
                       style={{
                         border: "1px solid green",
                         width: gridSize[0],

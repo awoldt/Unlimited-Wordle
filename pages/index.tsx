@@ -3,7 +3,7 @@ import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import RowDataInterface from "../interfaces/RowData";
 import WordleGrid from "../components/WordleGrid";
 import Keybaord from "../components/Keyboard";
-import { Container, Button, Alert } from "react-bootstrap";
+import { Container, Alert } from "react-bootstrap";
 import DeviceDetector from "device-detector-js";
 import deviceData from "../interfaces/DeviceData";
 import enableResponsiveLayout from "../scripts/responsiveLayout";
@@ -192,73 +192,8 @@ const Home = ({
             />
           )}
 
-          <Button
-            style={{
-              marginTop: "85px",
-              marginBottom: "50px",
-            }}
-            variant={"danger"}
-          >
-            <a
-              href={"/create"}
-              style={{
-                display: "block",
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-plus-circle"
-                viewBox="0 0 16 16"
-              >
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-              </svg>{" "}
-              Create a Game
-            </a>
-          </Button>
+          <code>Over 5,000 words to spell!</code>
 
-          <div>
-            <select
-              id="custom_word_length"
-              onChange={(e) => {
-                if (Number(e.target.value) == 5) {
-                  window.location.assign("/");
-                } else {
-                  window.location.assign("/?wl=" + e.target.value);
-                }
-              }}
-              style={{ marginBottom: "25px", marginRight: "15px" }}
-            >
-              <option selected>Length of Word</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5 (default)</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-            </select>
-            {gameStarted == false && (
-              <a
-                style={{ display: "inline-block", marginLeft: "15px" }}
-                href={"/rules"}
-              >
-                <div style={{ marginBottom: "10px" }}>How to Play</div>
-              </a>
-            )}
-          </div>
           <SocialMedia />
           <span className="text-secondary">
             <svg
@@ -313,333 +248,33 @@ async function getFiveLetterWord() {
   return fileData;
 }
 
-async function getCustomLengthWord(length: number) {
-  if (length == 3) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../threeletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 4) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../fourletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 5) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../fiveletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 6) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../sixletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 7) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../sevenletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 8) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../eightletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 9) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../nineletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 10) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../tenletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 11) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../elevenletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 12) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../twelveletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 13) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../thirteenletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 14) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../fourteenletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 15) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../fifteenletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  } else if (length == 16) {
-    const fileData = await new Promise((resolve, reject) => {
-      return fs.readFile(
-        path.resolve(__dirname, "../../../sixteenletterwords.txt"),
-        "utf-8",
-        async (err, data) => {
-          if (err) {
-            return reject(err);
-          } else {
-            const obj = await JSON.parse(data);
-
-            return resolve(obj[Math.floor(Math.random() * obj.length)]);
-          }
-        }
-      );
-    });
-
-    return fileData;
-  }
-}
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // GENERATE GAME WITH WORD OTEHR THAN 5 LETTERS
-  //CUSTOM LENGTH
-  if (
-    context.query.wl! &&
-    Number(context.query.wl) >= 3 &&
-    Number(context.query.wl) <= 16
-  ) {
-    const r = generateRepsonsiveLayout(
-      context.req.rawHeaders[
-        context.req.rawHeaders.indexOf(process.env.USER_AGENT!) + 1
-      ]
-    );
+  const r = generateRepsonsiveLayout(
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+  );
 
-    const lengthOfWord = context.query.wl;
-    let spellingsArray = new Array();
-    for (let i = 0; i < 6; ++i) {
-      spellingsArray.push(new Array(Number(lengthOfWord)).fill(""));
-    }
+  const WORD = await getFiveLetterWord();
 
-    const customLengthWord = await getCustomLengthWord(
-      Number(context.query.wl)
-    );
+  //DEFAULT 5 letter word game
+  const x: RowDataInterface = {
+    rowIndex: 0,
+    charIndex: 0,
+    spellings: [
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+    ],
+  };
 
-    //need to generate custon rowSpellings state
-    const x: RowDataInterface = {
-      rowIndex: 0,
-      charIndex: 0,
-      spellings: spellingsArray,
-    };
-
-    return {
-      props: {
-        word_to_spell: customLengthWord,
-        deviceLayout: r,
-        initialRowData: x,
-        defaultGame: false,
-      },
-    };
-  }
-  //GENREATE DEFAULT GAME
-  else {
-    const r = generateRepsonsiveLayout(
-      context.req.rawHeaders[
-        context.req.rawHeaders.indexOf(process.env.USER_AGENT!) + 1
-      ]
-    );
-
-    const wordOK = await getFiveLetterWord();
-
-    //DEFAULT 5 letter word game
-    const x: RowDataInterface = {
-      rowIndex: 0,
-      charIndex: 0,
-      spellings: [
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-      ],
-    };
-
-    return {
-      props: {
-        word_to_spell: wordOK,
-        deviceLayout: r,
-        initialRowData: x,
-        defaultGame: true,
-      },
-    };
-  }
+  return {
+    props: {
+      word_to_spell: WORD,
+      deviceLayout: r,
+      initialRowData: x,
+      defaultGame: true,
+    },
+  };
 };

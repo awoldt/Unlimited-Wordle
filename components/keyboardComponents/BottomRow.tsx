@@ -49,7 +49,6 @@ const BottomRow = ({
             }
             //user has not hit enter button on last char of row
             if (currentRow.charIndex == wordToSpell.length) {
-              console.log("press enter!");
             } else {
               const k = e.target as HTMLButtonElement;
               const keyCode: string = k.innerText;
@@ -61,7 +60,6 @@ const BottomRow = ({
                   alert("game over");
                   location.reload();
                 } else {
-                  console.log("new row!");
                   const y = { ...currentRow };
                   y.rowIndex += 1;
                   y.charIndex = 0;
@@ -74,8 +72,6 @@ const BottomRow = ({
                   changeRow(y);
                 }
               } else {
-                console.log("on row " + currentRow.rowIndex);
-
                 const x = [...currentRow.spellings[currentRow.rowIndex]];
                 x.splice(currentRow.charIndex, 1, keyCode);
 
@@ -94,8 +90,6 @@ const BottomRow = ({
     }
     //COLOR CODED
     else {
-      console.log("COLOR CODING " + letter);
-
       //find index of where in keysAlreadyUsed
       const keyBGColor = keysUsedAlready.indexOf(letter);
 
@@ -115,7 +109,6 @@ const BottomRow = ({
           }}
           onClick={(e) => {
             if (currentRow.charIndex == wordToSpell.length) {
-              console.log("press enter!");
             } else {
               const k = e.target as HTMLButtonElement;
               const keyCode: string = k.innerText;
@@ -128,7 +121,6 @@ const BottomRow = ({
                   alert("game over");
                   location.reload();
                 } else {
-                  console.log("new row!");
                   const y = { ...currentRow };
                   y.rowIndex += 1;
                   y.charIndex = 0;
@@ -141,8 +133,6 @@ const BottomRow = ({
                   changeRow(y);
                 }
               } else {
-                console.log("on row " + currentRow.rowIndex);
-
                 const x = [...currentRow.spellings[currentRow.rowIndex]];
                 x.splice(currentRow.charIndex, 1, keyCode);
 
@@ -185,8 +175,6 @@ const BottomRow = ({
     }
     //COLOR CODED
     else {
-      console.log("COLOR CODING " + letter);
-
       //find index of where in keysAlreadyUsed
       const keyBGColor = keysUsedAlready.indexOf(letter);
 
