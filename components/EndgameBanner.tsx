@@ -61,7 +61,7 @@ const Banner = ({
           window.location.reload();
         }}
         variant="link"
-        style={{ color: "red", textDecoration: "none" }}
+        style={{ color: "blue", textDecoration: "none" }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

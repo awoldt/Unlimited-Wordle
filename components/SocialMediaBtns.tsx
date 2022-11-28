@@ -9,23 +9,27 @@ const SocialMedia = () => {
         target={"_blank"}
         rel="noreferrer"
         className="fa fa-facebook"
-        title="share word game on Facebook"
+        title="Share to Facebook"
         style={{ color: "#3B5998" }}
       />
       <a
-        href={"https://twitter.com/share?url=https%3A%2F%2Fproduction-pja23flz7a-uc.a.run.app%2F"}
+        href={
+          "https://twitter.com/share?url=https%3A%2F%2Fproduction-pja23flz7a-uc.a.run.app%2F"
+        }
         target={"_blank"}
         rel="noreferrer"
         className="fa fa-twitter"
-        title="share word game on Twitter"
+        title="Share to Twitter"
         style={{ color: "#1DA1F2" }}
       />
       <a
-        href={"https://reddit.com/submit?url=https%3A%2F%2Fproduction-pja23flz7a-uc.a.run.app%2F"}
+        href={
+          "https://reddit.com/submit?url=https%3A%2F%2Fproduction-pja23flz7a-uc.a.run.app%2F"
+        }
         target={"_blank"}
         rel="noreferrer"
         className="fa fa-reddit"
-        title="share word game on Reddit"
+        title="Share to Reddit"
         style={{ color: "#FF5700" }}
       />
     </div>
