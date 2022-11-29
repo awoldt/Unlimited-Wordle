@@ -1,17 +1,13 @@
 import type { GetServerSideProps } from "next";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import RowDataInterface from "../interfaces/RowData";
 import WordleGrid from "../components/WordleGrid";
 import Keybaord from "../components/Keyboard";
-import { Container, Alert } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import DeviceDetector from "device-detector-js";
-import deviceData from "../interfaces/DeviceData";
-import enableResponsiveLayout from "../scripts/responsiveLayout";
-import enableResponsiveKeyboardLayout from "../scripts/repsonsiveKeyboard";
-import initializeResponsiveLayout from "../scripts/initializeResponsiveLayout";
+import gridWindowResize from "../scripts/gridWindowResize";
+import keybordWindowReize from "../scripts/keyboardWindowResize";
 import EndGameBannerInterface from "../interfaces/EndGameBanner";
-import InitializeCustomGameReponsiveResize from "../scripts/customGameResponsiveResize";
-import initializeCustomGameDeviceLayout from "../scripts/initializeCustomGameResponsiveLayout";
 
 import EndGameBanner from "../components/EndgameBanner";
 import Head from "next/head";
@@ -38,84 +34,33 @@ function generateRepsonsiveLayout(userAgent: string) {
   }
 }
 
-async function getFiveLetterWord() {
-  //fetch the json word list from s3 bucket
-  const word = await axios.get(
-    "https://unlimited-wordle.s3.amazonaws.com/words-list.json"
-  );
-  return word.data[Math.floor(Math.random() * word.data.length)];
-}
-
 const Home = ({
   word_to_spell,
-  deviceLayout,
   initialRowData,
-  defaultGame,
+  gridDementions,
+  keyboardDementions,
 }: {
   word_to_spell: string;
-  deviceLayout: deviceData;
   initialRowData: RowDataInterface;
-  defaultGame: boolean;
+  gridDementions: string[];
+  keyboardDementions: string[];
 }) => {
   const [rowSpellings, setRowSpellings] =
     useState<RowDataInterface>(initialRowData);
 
-  const alertRef = useRef<HTMLDivElement>(null);
-
-  const [word, setWord] = useState<string>(word_to_spell);
-
-  const [gridDimentions, setGridDimentions] = useState<string[]>([]); //W x H x FontSize
-  const [keyboardDimentions, setKeyboardDimentions] = useState<string[]>([]);
-  const [alertMessage, setAlertMessage] = useState<string>("");
+  const [gridDimentions, setGridDimentions] =
+    useState<string[]>(gridDementions); //W x H x FontSize
+  const [keyboardDimentions, setKeyboardDimentions] =
+    useState<string[]>(keyboardDementions);
   const [endGameBanner, setEndGameBanner] = useState<EndGameBannerInterface>();
   const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [gameOver, setGameOver] = useState<boolean>(false);
 
   //sets the dementions of grid BEFORE rendering child component
   useEffect(() => {
-    const w: number = window.innerWidth;
-
-    if (defaultGame == true) {
-      initializeResponsiveLayout(
-        String(deviceLayout),
-        w,
-        setGridDimentions,
-        setKeyboardDimentions
-      );
-      enableResponsiveLayout(gridDimentions, setGridDimentions);
-      enableResponsiveKeyboardLayout(keyboardDimentions, setKeyboardDimentions);
-    } else {
-      InitializeCustomGameReponsiveResize(
-        keyboardDimentions,
-        setKeyboardDimentions,
-        gridDimentions,
-        setGridDimentions
-      );
-
-      initializeCustomGameDeviceLayout(
-        String(deviceLayout),
-        w,
-        setGridDimentions,
-        setKeyboardDimentions
-      );
-    }
+    gridWindowResize(gridDimentions, setGridDimentions);
+    keybordWindowReize(keyboardDimentions, setKeyboardDimentions);
   }, []);
-
-  useEffect(() => {
-    //will only run if alertmessage is not empty string
-    //prevents infinite loops when changing alert message state below
-    if (alertMessage !== "") {
-      const t = setTimeout(() => {
-        if (alertRef.current!) {
-          setAlertMessage("");
-        }
-      }, 2000);
-
-      return () => {
-        clearTimeout(t);
-      };
-    }
-  }, [alertMessage]);
 
   return (
     <>
@@ -158,10 +103,7 @@ const Home = ({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
-        <link
-          rel="canonical"
-          href="https://production-pja23flz7a-uc.a.run.app/"
-        />
+        <link rel="canonical" href="https://unlimited-wordle.vercel.app/" />
       </Head>
       <Container fluid>
         <div
@@ -170,25 +112,16 @@ const Home = ({
         >
           <WordleGrid
             rowData={rowSpellings}
-            word={word}
+            word={word_to_spell}
             gridSize={gridDimentions}
           />
-
-          {alertMessage !== "" && (
-            <Container>
-              <Alert variant={"danger"} ref={alertRef}>
-                {alertMessage}
-              </Alert>
-            </Container>
-          )}
 
           {gameOver == false && (
             <Keybaord
               changeRow={setRowSpellings}
               currentRow={rowSpellings}
-              currentWord={word}
+              currentWord={word_to_spell}
               keyboardSize={keyboardDimentions}
-              setAlert={setAlertMessage}
               setEndgame={setEndGameBanner}
               gameStart={setGameStarted}
               hasGameStarted={gameStarted}
@@ -207,10 +140,29 @@ const Home = ({
           <code style={{ display: "block" }}>Over 5,000 words to spell!</code>
 
           <SocialMedia />
+
+          <a
+            href={"/rules"}
+            style={{ textDecoration: "none" }}
+            title="Learn how to play game"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-question-diamond"
+              viewBox="0 0 16 16"
+            >
+              <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z" />
+              <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+            </svg>{" "}
+            How to play
+          </a>
           <span
             style={{
               display: "block",
-              marginTop: "100px",
+              marginTop: "10px",
               marginBottom: "10px",
             }}
           >
@@ -242,11 +194,15 @@ const Home = ({
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const r = generateRepsonsiveLayout(
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+  const device_layout = generateRepsonsiveLayout(
+    context.req.headers["user-agent"]!
   );
 
-  const WORD = await getFiveLetterWord();
+  //fetch the json word list from s3 bucket
+  const word = await axios.get(
+    "https://unlimited-wordle.s3.amazonaws.com/words-list.json"
+  );
+  const WORD = word.data[Math.floor(Math.random() * word.data.length)];
 
   //DEFAULT 5 letter word game
   const x: RowDataInterface = {
@@ -262,12 +218,38 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ],
   };
 
+  //generate grid dementions
+  //ex: ["80px", "80px", "26px"] //W x H x FontSize (grid dementions state variable)
+  let GRID_DEMENTIONS: string[];
+  if (device_layout === "desktop") {
+    GRID_DEMENTIONS = ["80px", "80px", "26px"];
+  } else if (device_layout === "tablet") {
+    GRID_DEMENTIONS = ["70px", "70px", "20px"];
+  } else if (device_layout === "phone") {
+    GRID_DEMENTIONS = ["60px", "60px", "18px"];
+  } else {
+    GRID_DEMENTIONS = ["50px", "50px", "16px"];
+  }
+
+  //generate keyboard dementions
+  let KEYBOARD_DEMENTIONS: string[];
+  if (device_layout === "desktop") {
+    KEYBOARD_DEMENTIONS = ["70px", "70px", "28px"];
+  } else if (device_layout === "tablet") {
+    KEYBOARD_DEMENTIONS = ["50px", "50px", "23px"];
+  } else if (device_layout === "phone") {
+    KEYBOARD_DEMENTIONS = ["29px", "29px", "16px"];
+  } else {
+    KEYBOARD_DEMENTIONS = ["29px", "29px", "16px"];
+  }
+
   return {
     props: {
       word_to_spell: WORD,
-      deviceLayout: r,
+
       initialRowData: x,
-      defaultGame: true,
+      gridDementions: GRID_DEMENTIONS,
+      keyboardDementions: KEYBOARD_DEMENTIONS,
     },
   };
 };

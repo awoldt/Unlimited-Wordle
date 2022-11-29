@@ -15,7 +15,7 @@ const K = ({
   changeRow,
   currentWord,
   keyboardSize,
-  setAlert,
+
   setEndgame,
   gameStart,
   hasGameStarted,
@@ -26,7 +26,7 @@ const K = ({
   changeRow: React.Dispatch<React.SetStateAction<RowSpellingsInterface>>;
   currentWord: string;
   keyboardSize: string[];
-  setAlert: React.Dispatch<React.SetStateAction<string>>;
+
   setEndgame: React.Dispatch<
     React.SetStateAction<EndGameInterface | undefined>
   >;
@@ -215,7 +215,7 @@ const K = ({
                       }
                       //WORD DOES NOT EXIST
                     } else {
-                      setAlert("Not in word list");
+                      alert("Not in word list");
                     }
                   } else {
                     alert("mist finishe spelling worD!");
