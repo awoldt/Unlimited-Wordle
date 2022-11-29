@@ -6,20 +6,26 @@ const Rules = () => {
   return (
     <>
       <Head>
-        <title>How to Play Wordlebin</title>
+        <title>How to Play</title>
         <meta
           name={"description"}
           content={
-            "Learn how to play wordlebin, a 5-letter word guessing game. Learn what the green, yellow, and grey colors mean."
+            "Learn how to play this 5-letter word guessing game. Learn what the green, yellow, and grey colors mean."
           }
         />
-        <meta property="og:title" content="How to Play Wordlebin" />
+        <meta property="og:title" content="How to Play 5-Letter Word Game" />
         <meta
           property="og:description"
           content="Learn how to play 5-letter word guessing game"
         />
-        <meta property="og:image" content="https://wordlebin.com/favicon.ico" />
-        <link rel="canonical" href="https://wordlebin.com/rules" />
+        <meta
+          property="og:image"
+          content="https://unlimited-wordle.vercel.app/favicon.ico"
+        />
+        <link
+          rel="canonical"
+          href="https://unlimited-wordle.vercel.app/rules"
+        />
       </Head>
       <Container style={{ maxWidth: "850px", marginTop: "25px" }}>
         <div className="text-center">
@@ -42,10 +48,9 @@ const Rules = () => {
 
         <h1>How to Play</h1>
         <p>
-          Wordlebin is a basic word game where the objective is to guess a
-          random 5-letter word within six attempts. Each attempt will highlight
-          parts of the word where the letters used are correct and where they
-          are not.
+          This is a basic word game where the objective is to guess a random
+          5-letter word within six attempts. Each attempt will highlight parts
+          of the word where the letters used are correct and where they are not.
           <br></br>
           <br></br>
           These highlighted portions of the word will be either:
@@ -180,17 +185,6 @@ const Rules = () => {
           <i>&quot;asdfg&quot;</i> would not register. These two rules take the
           challenge of this word game to a new level. Remeber to practice and
           learn new words along the way!
-        </p>
-
-        <p style={{marginBottom: '50px'}}>
-          If you wish to play wordlebin games with words that contain more than
-          5 letters, click the <i>Length of Word</i> button at the bottom of the
-          homepage. You can also create a custom wordlebin game to share with
-          frinds and family{" "}
-          <a href={"/create"} style={{ textDecoration: "none" }}>
-            here
-          </a>
-          .
         </p>
       </Container>
     </>

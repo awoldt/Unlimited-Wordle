@@ -1,12 +1,11 @@
 //iaw = IS A WORD
-//will determine if word is located in word bank of +300,000 words
+//will determine if word is located in word bank of +5,000 words
 
 import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   status: number;
-  word?: string;
 };
 
 export default async function handler(
