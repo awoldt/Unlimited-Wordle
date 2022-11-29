@@ -238,9 +238,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } else if (device_layout === "tablet") {
     KEYBOARD_DEMENTIONS = ["50px", "50px", "23px"];
   } else if (device_layout === "phone") {
-    KEYBOARD_DEMENTIONS = ["29px", "29px", "16px"];
+    KEYBOARD_DEMENTIONS = ["30px", "30px", "17px"];
   } else {
-    KEYBOARD_DEMENTIONS = ["29px", "29px", "16px"];
+    KEYBOARD_DEMENTIONS = ["30px", "30px", "17px"];
   }
 
   return {
