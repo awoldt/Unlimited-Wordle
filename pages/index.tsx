@@ -1,71 +1,62 @@
 import type { GetServerSideProps } from "next";
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import RowDataInterface from "../interfaces/RowData";
 import WordleGrid from "../components/WordleGrid";
 import Keybaord from "../components/Keyboard";
 import { Container } from "react-bootstrap";
-import DeviceDetector from "device-detector-js";
 import gridWindowResize from "../scripts/gridWindowResize";
 import keybordWindowReize from "../scripts/keyboardWindowResize";
 import EndGameBannerInterface from "../interfaces/EndGameBanner";
-
+import generateRepsonsiveLayout from "../scripts/detectDevice";
 import EndGameBanner from "../components/EndgameBanner";
 import Head from "next/head";
 import SocialMedia from "../components/SocialMediaBtns";
 import axios from "axios";
 
-const UserDevice = new DeviceDetector();
-
-function generateRepsonsiveLayout(userAgent: string) {
-  //generate responsive layout numbers before sending to frontend
-  const device = UserDevice.parse(userAgent).device;
-  if (device!) {
-    if (device.type!) {
-      if (device.type == "desktop") {
-        return "desktop";
-      } else if (device.type == "tablet") {
-        return "tablet";
-      } else if (device.type == "smartphone") {
-        return "phone";
-      } else {
-        return "unknown_device";
-      }
-    }
-  }
-}
-
 const Home = ({
   word_to_spell,
   initialRowData,
-  gridDementions,
-  keyboardDementions,
 }: {
   word_to_spell: string;
   initialRowData: RowDataInterface;
-  gridDementions: string[];
-  keyboardDementions: string[];
 }) => {
   const [rowSpellings, setRowSpellings] =
     useState<RowDataInterface>(initialRowData);
 
-  const [gridDimentions, setGridDimentions] =
-    useState<string[]>(gridDementions); //W x H x FontSize
-  const [keyboardDimentions, setKeyboardDimentions] =
-    useState<string[]>(keyboardDementions);
+  const [gridDimentions, setGridDimentions] = useState<string[]>([]); //W x H x FontSize
+  const [keyboardDimentions, setKeyboardDimentions] = useState<string[]>([]);
   const [endGameBanner, setEndGameBanner] = useState<EndGameBannerInterface>();
   const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [gameOver, setGameOver] = useState<boolean>(false);
 
   //sets the dementions of grid BEFORE rendering child component
-  useEffect(() => {
-    gridWindowResize(gridDimentions, setGridDimentions);
-    keybordWindowReize(keyboardDimentions, setKeyboardDimentions);
+  useLayoutEffect(() => {
+    gridWindowResize(setGridDimentions);
+    keybordWindowReize(setKeyboardDimentions);
+
+    //adjust the keyboard and grid based on window size on pageload
+    const w = window.innerWidth;
+    //desktop
+    if (w >= 992) {
+      setKeyboardDimentions(["50px", "50px", "28px"]);
+      setGridDimentions(["80px", "80px", "26px"]);
+    }
+    //phone or smaller
+    else if (w <= 575) {
+      setKeyboardDimentions(["30px", "30px", "17px"]);
+      setGridDimentions(["50px", "50px", "18px"]);
+    }
+    //tablet
+    else {
+      setKeyboardDimentions(["40px", "40px", "23px"]);
+      setGridDimentions(["70px", "70px", "23px"]);
+    }
   }, []);
 
   return (
     <>
       <Head>
-        <title>Unlimited Word Game </title>
+        <title>Wordle Clone</title>
         <meta
           name={"description"}
           content={
@@ -218,38 +209,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ],
   };
 
-  //generate grid dementions
-  //ex: ["80px", "80px", "26px"] //W x H x FontSize (grid dementions state variable)
-  let GRID_DEMENTIONS: string[];
-  if (device_layout === "desktop") {
-    GRID_DEMENTIONS = ["80px", "80px", "26px"];
-  } else if (device_layout === "tablet") {
-    GRID_DEMENTIONS = ["70px", "70px", "20px"];
-  } else if (device_layout === "phone") {
-    GRID_DEMENTIONS = ["60px", "60px", "18px"];
-  } else {
-    GRID_DEMENTIONS = ["50px", "50px", "16px"];
-  }
-
-  //generate keyboard dementions
-  let KEYBOARD_DEMENTIONS: string[];
-  if (device_layout === "desktop") {
-    KEYBOARD_DEMENTIONS = ["70px", "70px", "28px"];
-  } else if (device_layout === "tablet") {
-    KEYBOARD_DEMENTIONS = ["50px", "50px", "23px"];
-  } else if (device_layout === "phone") {
-    KEYBOARD_DEMENTIONS = ["30px", "30px", "17px"];
-  } else {
-    KEYBOARD_DEMENTIONS = ["30px", "30px", "17px"];
-  }
-
   return {
     props: {
       word_to_spell: WORD,
-
       initialRowData: x,
-      gridDementions: GRID_DEMENTIONS,
-      keyboardDementions: KEYBOARD_DEMENTIONS,
     },
   };
 };
