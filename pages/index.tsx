@@ -16,15 +16,21 @@ import axios from "axios";
 const Home = ({
   word_to_spell,
   initialRowData,
+  keyboard_dimentions,
+  grid_dimentions,
 }: {
   word_to_spell: string;
   initialRowData: RowDataInterface;
+  keyboard_dimentions: string[];
+  grid_dimentions: string[];
 }) => {
   const [rowSpellings, setRowSpellings] =
     useState<RowDataInterface>(initialRowData);
 
-  const [gridDimentions, setGridDimentions] = useState<string[]>([]); //W x H x FontSize
-  const [keyboardDimentions, setKeyboardDimentions] = useState<string[]>([]);
+  const [gridDimentions, setGridDimentions] =
+    useState<string[]>(grid_dimentions); //W x H x FontSize
+  const [keyboardDimentions, setKeyboardDimentions] =
+    useState<string[]>(keyboard_dimentions);
   const [endGameBanner, setEndGameBanner] = useState<EndGameBannerInterface>();
   const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [gameOver, setGameOver] = useState<boolean>(false);
@@ -209,10 +215,37 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ],
   };
 
+  //generate grid dementions
+  //ex: ["80px", "80px", "26px"] //W x H x FontSize (grid dementions state variable)
+  let GRID_DIMENTIONS: string[];
+  if (device_layout === "desktop") {
+    GRID_DIMENTIONS = ["80px", "80px", "26px"];
+  } else if (device_layout === "tablet") {
+    GRID_DIMENTIONS = ["70px", "70px", "23px"];
+  } else if (device_layout === "phone") {
+    GRID_DIMENTIONS = ["50px", "50px", "18px"];
+  } else {
+    GRID_DIMENTIONS = ["50px", "50px", "18px"];
+  }
+
+  //generate keyboard dementions
+  let KEYBOARD_DIMENTIONS: string[];
+  if (device_layout === "desktop") {
+    KEYBOARD_DIMENTIONS = ["50px", "50px", "28px"];
+  } else if (device_layout === "tablet") {
+    KEYBOARD_DIMENTIONS = ["40px", "40px", "23px"];
+  } else if (device_layout === "phone") {
+    KEYBOARD_DIMENTIONS = ["30px", "30px", "17px"];
+  } else {
+    KEYBOARD_DIMENTIONS = ["30px", "30px", "17px"];
+  }
+
   return {
     props: {
       word_to_spell: WORD,
       initialRowData: x,
+      keyboard_dimentions: KEYBOARD_DIMENTIONS,
+      grid_dimentions: GRID_DIMENTIONS,
     },
   };
 };
