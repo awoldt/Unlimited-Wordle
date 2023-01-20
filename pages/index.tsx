@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from "next";
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import RowDataInterface from "../interfaces/RowData";
 import WordleGrid from "../components/WordleGrid";
 import Keybaord from "../components/Keyboard";
@@ -30,7 +30,7 @@ const Home = ({
   const [gameOver, setGameOver] = useState<boolean>(false);
 
   //sets the dementions of grid BEFORE rendering child component
-  useLayoutEffect(() => {
+  useEffect(() => {
     gridWindowResize(setGridDimentions);
     keybordWindowReize(setKeyboardDimentions);
 
