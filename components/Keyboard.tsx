@@ -218,7 +218,7 @@ const K = ({
                       alert("Not in word list");
                     }
                   } else {
-                    alert("mist finishe spelling worD!");
+                    alert("Word must be 5 characters in length");
                   }
                 }}
               >
