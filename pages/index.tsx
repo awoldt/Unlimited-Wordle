@@ -12,6 +12,8 @@ import EndGameBanner from "../components/EndgameBanner";
 import Head from "next/head";
 import SocialMedia from "../components/SocialMediaBtns";
 import axios from "axios";
+import fs from "fs/promises";
+import path from "path";
 
 const Home = ({
   word_to_spell,
@@ -195,11 +197,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     context.req.headers["user-agent"]!
   );
 
-  //fetch the json word list from s3 bucket
-  const word = await axios.get(
-    "https://unlimited-wordle.s3.amazonaws.com/words-list.json"
+  // get word to spell
+  const wordsTxt = await fs.readFile(
+    path.join(process.cwd(), "words-list.json"),
+    {
+      encoding: "utf-8",
+    }
   );
-  const WORD = word.data[Math.floor(Math.random() * word.data.length)];
+  const words = JSON.parse(wordsTxt);
+  const word = words[Math.floor(Math.random() * words.length)];
 
   //DEFAULT 5 letter word game
   const x: RowDataInterface = {
@@ -242,7 +248,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      word_to_spell: WORD,
+      word_to_spell: word,
       initialRowData: x,
       keyboard_dimentions: KEYBOARD_DIMENTIONS,
       grid_dimentions: GRID_DIMENTIONS,
