@@ -11,7 +11,6 @@ import generateRepsonsiveLayout from "../scripts/detectDevice";
 import EndGameBanner from "../components/EndgameBanner";
 import Head from "next/head";
 import SocialMedia from "../components/SocialMediaBtns";
-import axios from "axios";
 import fs from "fs/promises";
 import path from "path";
 
@@ -64,19 +63,42 @@ const Home = ({
   return (
     <>
       <Head>
-        <title>Wordle Clone</title>
+        <title>Unlimited Wordle Game - Play for Free</title>
         <meta
-          name={"description"}
-          content={
-            "Play online word guessing game with over 5000 words to spell. Play games with friends and test your word guessing skills."
-          }
+          name="description"
+          content="Enjoy endless fun with our Unlimited Wordle Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
         />
-        <meta property="og:title" content="Play 5-Word Guessing Game" />
+
+        <meta property="og:url" content="https://unlimitedwordle.app" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Unlimited Wordle Game - Play for Free"
+        />
         <meta
           property="og:description"
-          content="Play free online guessing game and share custom games with friends."
+          content="Enjoy endless fun with our Unlimited Wordle Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
         />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta
+          property="og:image"
+          content="https://unlimitedwordle.app/favicon.ico"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="opengraph.dev" />
+        <meta property="twitter:url" content="https://opengraph.dev" />
+        <meta
+          name="twitter:title"
+          content="Unlimited Wordle Game - Play for Free"
+        />
+        <meta
+          name="twitter:description"
+          content="Enjoy endless fun with our Unlimited Wordle Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
+        />
+        <meta
+          name="twitter:image"
+          content="https://unlimitedwordle.app/favicon.ico"
+        />
 
         <link
           rel="apple-touch-icon"
@@ -95,9 +117,7 @@ const Home = ({
           sizes="16x16"
           href="/favicon-16x16.png"
         />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
+
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
