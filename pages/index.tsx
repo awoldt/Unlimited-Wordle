@@ -122,7 +122,7 @@ const Home = ({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
-        <link rel="canonical" href="https://unlimited-wordle.vercel.app/" />
+        <link rel="canonical" href="https://unlimitedwordle.app/" />
       </Head>
       <Container fluid>
         <div

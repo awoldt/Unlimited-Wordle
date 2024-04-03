@@ -20,11 +20,11 @@ const Rules = () => {
         />
         <meta
           property="og:image"
-          content="https://unlimited-wordle.vercel.app/favicon.ico"
+          content="https://unlimitedwordle.app/favicon.ico"
         />
         <link
           rel="canonical"
-          href="https://unlimited-wordle.vercel.app/rules"
+          href="https://unlimitedwordle.app/rules"
         />
       </Head>
       <Container style={{ maxWidth: "850px", marginTop: "25px" }}>
