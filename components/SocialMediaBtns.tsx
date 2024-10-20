@@ -4,7 +4,7 @@ const SocialMedia = () => {
       <p style={{ marginBottom: "0px" }}>Share with friends</p>
       <a
         href={
-          "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Funlimitedwordle.app"
+          "https://www.facebook.com/sharer/sharer.php?u=https://word-game-lovat.vercel.app/"
         }
         target={"_blank"}
         rel="noreferrer"
@@ -14,7 +14,7 @@ const SocialMedia = () => {
       />
       <a
         href={
-          "https://twitter.com/share?url=https%3A%2F%2Funlimitedwordle.app"
+          "https://twitter.com/share?url=https://word-game-lovat.vercel.app/"
         }
         target={"_blank"}
         rel="noreferrer"
@@ -24,7 +24,7 @@ const SocialMedia = () => {
       />
       <a
         href={
-          "https://reddit.com/submit?url=https%3A%2F%2Funlimitedwordle.app"
+          "https://reddit.com/submit?url=https://word-game-lovat.vercel.app/"
         }
         target={"_blank"}
         rel="noreferrer"

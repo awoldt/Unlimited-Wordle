@@ -20,11 +20,11 @@ const Rules = () => {
         />
         <meta
           property="og:image"
-          content="https://unlimitedwordle.app/favicon.ico"
+          content="https://word-game-lovat.vercel.app/favicon.ico"
         />
         <link
           rel="canonical"
-          href="https://unlimitedwordle.app/rules"
+          href="https://word-game-lovat.vercel.app/rules"
         />
       </Head>
       <Container style={{ maxWidth: "850px", marginTop: "25px" }}>
@@ -137,7 +137,7 @@ const Rules = () => {
             <Image
               src="/rules_pic_2.webp"
               fluid
-              alt="what does yellow mean in wordle"
+              alt="what does yellow mean?"
             />
             <p>
               Both letter <code style={{ color: "black" }}>E</code>&apos;s are
@@ -166,7 +166,7 @@ const Rules = () => {
             <Image
               src="/rules_pic_3.webp"
               fluid
-              alt="what does grey mean in wordle"
+              alt="what does grey mean?"
             />
             <p>
               At no point in <i>&quot;beans&quot;</i> does a single letter match

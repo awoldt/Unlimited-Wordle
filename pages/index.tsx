@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 import RowDataInterface from "../interfaces/RowData";
-import WordleGrid from "../components/WordleGrid";
+import WordGrid from "../components/WordGrid";
 import Keybaord from "../components/Keyboard";
 import { Container } from "react-bootstrap";
 import gridWindowResize from "../scripts/gridWindowResize";
@@ -63,25 +63,25 @@ const Home = ({
   return (
     <>
       <Head>
-        <title>Unlimited Wordle Game - Play for Free</title>
+        <title>Unlimited Word Game - Play for Free</title>
         <meta
           name="description"
-          content="Enjoy endless fun with our Unlimited Wordle Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
+          content="Enjoy endless fun with our Unlimited Word Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
         />
 
-        <meta property="og:url" content="https://unlimitedwordle.app" />
+        <meta property="og:url" content="https://word-game-lovat.vercel.app/" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content="Unlimited Wordle Game - Play for Free"
+          content="Unlimited Word Game - Play for Free"
         />
         <meta
           property="og:description"
-          content="Enjoy endless fun with our Unlimited Wordle Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
+          content="Enjoy endless fun with our Unlimited Word Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
         />
         <meta
           property="og:image"
-          content="https://unlimitedwordle.app/favicon.ico"
+          content="https://word-game-lovat.vercel.app/favicon.ico"
         />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -89,15 +89,15 @@ const Home = ({
         <meta property="twitter:url" content="https://opengraph.dev" />
         <meta
           name="twitter:title"
-          content="Unlimited Wordle Game - Play for Free"
+          content="Unlimited Word Game - Play for Free"
         />
         <meta
           name="twitter:description"
-          content="Enjoy endless fun with our Unlimited Wordle Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
+          content="Enjoy endless fun with our Unlimited Word Game! Play for free and challenge yourself with a limitless array of word puzzles. There are over 5,000 words!"
         />
         <meta
           name="twitter:image"
-          content="https://unlimitedwordle.app/favicon.ico"
+          content="https://word-game-lovat.vercel.app/favicon.ico"
         />
 
         <link
@@ -122,14 +122,14 @@ const Home = ({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
-        <link rel="canonical" href="https://unlimitedwordle.app/" />
+        <link rel="canonical" href="https://word-game-lovat.vercel.app/" />
       </Head>
       <Container fluid>
         <div
           className="text-center"
           style={{ paddingTop: "50px", marginBottom: "25px" }}
         >
-          <WordleGrid
+          <WordGrid
             rowData={rowSpellings}
             word={word_to_spell}
             gridSize={gridDimentions}

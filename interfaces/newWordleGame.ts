@@ -1,7 +1,7 @@
-interface newWordleGame {
-    word: string
-    views: Number
-    endGameMsg: string | null
+interface NewWordGame {
+  word: string;
+  views: Number;
+  endGameMsg: string | null;
 }
 
-export default newWordleGame;
+export default NewWordGame;
